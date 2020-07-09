@@ -1,0 +1,2 @@
+# plant-people
+Capstone Project
