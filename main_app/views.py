@@ -5,7 +5,7 @@ from django.http import HttpResponse
 
 # Home Route
 def landing(request):
-    return HttpResponse('<h1>Landing Page</h1>')
+    return render(request, 'landing.html')
 
 # Community Posts Route
 def community(request):

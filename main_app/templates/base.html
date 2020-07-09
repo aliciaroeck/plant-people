@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Plant People</title>
+
+        <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="{% static 'vendors/bootstrap-grid.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/bootstrap-reboot.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/bootstrap.min.css' %}">
+    <script src="{% static 'vendors/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'vendors/bootstrap.min.js' %}"></script>
+
+        <!-- Custom Styles -->
+    <link rel="stylesheet" href="{% static 'styles/base.css' %}">
+
+        <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif&family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Header for the base!</h1>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    
+</body>
+</html>

@@ -119,3 +119,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+AUTH_USER_MODEL = 'main_app.CustomUser'
+MEDIA_URL = '/main_app/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'main_app/static/')
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/community/'
