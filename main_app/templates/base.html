@@ -1,12 +1,15 @@
 {% load static %}
 
+{% load crispy_forms_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Plant People</title>
-
+         <!-- Compiled and minified Jquery -->
+    <script src="{% static 'vendors/jquery.min.js' %}"></script>
         <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="{% static 'vendors/bootstrap-grid.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendors/bootstrap-reboot.min.css' %}">
@@ -21,8 +24,85 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif&family=Poppins&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Header for the base!</h1>
+    <header class="d-flex align-items-center justify-content-between">
+        <!-- dropdown menu nav -->
+        <nav class="">
+            <div class="dropdown show">
+                <a class="nav-list" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-list" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                </a>
+            
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="#">About</a>
+                    <a class="dropdown-item" href="#">Contact</a>
+                    <a class="dropdown-item" href="#">Community</a>
+                </div>
+            </div>
+        </nav>
+        <h4 class="title">The Plant People</h4>
+
+
+        <div>
+            <!-- Login Button trigger modal -->
+            <a class="user-nav" data-toggle="modal" data-target="#loginModalCenter">Login</a>
+            
+            
+            <!-- Login Modal -->
+            <div class="modal fade" id="loginModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="float-right p-3">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <h4 class="modal-title d-flex justify-content-center" id="exampleModalLongTitle">Welcome, Plant People!</h4>
+                    <div class="modal-body">
+                        <form action="" method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        </form>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <h6><span>or</span></h6>
+                    </div>
+                    <a class="modal-link close text-center p-2 mb-1" data-toggle="modal" data-target="#registerModalCenter" data-dismiss="modal" aria-label="Close">
+                        Not a member? Register
+                    </a>
+                   
+                </div>
+                </div>
+            </div>
+
+            <!-- Register Button trigger modal -->
+            <a class="user-nav" data-toggle="modal" data-target="#registerModalCenter">Register</a>
+            
+            
+            <!-- Register Modal -->
+            <div class="modal fade" id="registerModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="float-right p-3">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <h4 class="modal-title d-flex justify-content-center" id="exampleModalLongTitle">Create an Account!</h4>
+                    <div class="modal-body">
+                    register
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <h6><span>or</span></h6>
+                    </div>
+                    <a class="modal-link close text-center p-2 mb-1" data-toggle="modal" data-target="#loginModalCenter" data-dismiss="modal" aria-label="Close">
+                        Have an account? Login
+                    </a>
+                </div>
+                </div>
+            </div>
+        </div>
     </header>
     <main>
         {% block content %}

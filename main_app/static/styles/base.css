@@ -1,0 +1,73 @@
+
+/* header */
+header {
+    height: 90px;
+    width: 100%
+}
+
+.title {
+    border: solid black 5px;
+    padding: 5px 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+a.user-nav {
+    text-decoration: none;
+}
+
+.user-nav {
+    font-family: 'PT Serif', serif;
+    color: black;
+    transition: .3s linear;
+    padding-right: 15px;
+}
+
+a.user-nav:hover {
+    color: lightgray;
+    cursor: pointer;
+}
+
+/* modal */
+.modal-title {
+    font-family: 'Poppins', sans-serif;
+}
+
+.modal-link {
+    font-size: 14px;
+    font-family: 'PT Serif', serif;
+    transition: .3s linear;
+}
+
+.modal-link:hover {
+    color: black;
+    cursor: pointer;
+}
+
+h6 {
+    width: 80%; 
+    text-align: center; 
+    border-bottom: 1px solid gray; 
+    line-height: 0.1em;
+    margin: 10px 0 20px; 
+ } 
+ 
+ h6 span { 
+     background:#fff; 
+     padding:0 10px; 
+ }
+
+/* nav dropdown */
+.dropdown-item {
+    font-family: 'PT Serif', serif;
+}
+
+.nav-list {
+    margin: 10px;
+    padding: 10px;
+    color: black;
+    transition: .3s linear;
+}
+
+a.nav-list:hover {
+    color: lightgray;
+}
