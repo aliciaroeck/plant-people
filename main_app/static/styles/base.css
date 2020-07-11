@@ -71,3 +71,80 @@ h6 {
 a.nav-list:hover {
     color: lightgray;
 }
+
+/* footer */
+footer {
+    width: 100%;
+}
+
+.main-footer {
+    width: 100%;
+    background-color: #3e432d;
+    height: 300px;
+}
+
+a.nav-link {
+    text-decoration: none;
+    color: white;
+    transition: .3s linear;
+    font-size: 14px;
+}
+
+a.nav-link:hover {
+    color: #c3c4b2;
+}
+
+.footer-title {
+    margin: 20px;
+    color: white;
+    text-align: center;
+    border: solid white 5px;
+    padding: 10px 25px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.first {
+    padding-left: 100px;
+}
+
+.second {
+    padding-left: 400px;
+}
+
+.newsletter-input {
+    padding: 1px 60px;
+    border-radius: 3px;
+}
+
+.newsletter {
+    padding-bottom: 20px;
+    color: white;
+}
+
+.social {
+    padding-top: 20px;
+    color: white;
+}
+
+.social-icon {
+    color: white;
+}
+
+input.newsletter-input {
+    background-color: #c0c0c0;
+    border: none;
+}
+
+button.footer-submit {
+    background-color: #3e432d;
+    border: solid white 1px;
+    border-radius: 3px;
+    color: white;
+    padding: 0 20px;
+}
+
+.bottom-footer {
+    color: #3e432d;
+    padding: 10px;
+    font-size: 12px;
+}

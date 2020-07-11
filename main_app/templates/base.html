@@ -8,6 +8,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Plant People</title>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
          <!-- Compiled and minified Jquery -->
     <script src="{% static 'vendors/jquery.min.js' %}"></script>
         <!-- BOOTSTRAP -->
@@ -45,12 +47,19 @@
 
 
         <div>
+            {% if user.is_authenticated %}
+                <a class="user-nav" href="">Profile</a>
+                <a class="user-nav" href="{% url 'logout' %}">Logout</a>
+            {% else %}
             <!-- Login Button trigger modal -->
-            <a class="user-nav" data-toggle="modal" data-target="#loginModalCenter">Login</a>
+            <a class="user-nav" data-toggle="modal" data-target="#loginModal">Login</a>
             
-            
+            <!-- Register Button trigger modal -->
+            <a class="user-nav" data-toggle="modal" data-target="#registerModal">Register</a>
+            {% endif %}
+
             <!-- Login Modal -->
-            <div class="modal fade" id="loginModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="float-right p-3">
@@ -60,10 +69,25 @@
                     </div>
                     <h4 class="modal-title d-flex justify-content-center" id="exampleModalLongTitle">Welcome, Plant People!</h4>
                     <div class="modal-body">
-                        <form action="" method="POST">
-                        {% csrf_token %}
-                        {{ form|crispy }}
-                        </form>
+                        <form action="{% url 'login' %}" method="POST" id="loginForm">
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">Username</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="inputPassword" placeholder="Username" name="username">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-10">
+                                  <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
+                                </div>
+                              </div>
+                              {% if error %}
+                                <p class="loginError">{{error}}</p>
+                              {% endif %}
+                                <input type="submit" class="btn btn-success" value="Login">
+                            </form>
                     </div>
                     <div class="d-flex justify-content-center">
                         <h6><span>or</span></h6>
@@ -75,13 +99,9 @@
                 </div>
                 </div>
             </div>
-
-            <!-- Register Button trigger modal -->
-            <a class="user-nav" data-toggle="modal" data-target="#registerModalCenter">Register</a>
-            
             
             <!-- Register Modal -->
-            <div class="modal fade" id="registerModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="float-right p-3">
@@ -91,7 +111,11 @@
                     </div>
                     <h4 class="modal-title d-flex justify-content-center" id="exampleModalLongTitle">Create an Account!</h4>
                     <div class="modal-body">
-                    register
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            {{ form | crispy }}
+                            <input type="submit" value="Signup">
+                        </form>
                     </div>
                     <div class="d-flex justify-content-center">
                         <h6><span>or</span></h6>
@@ -107,7 +131,42 @@
     <main>
         {% block content %}
         {% endblock %}
-    </main>
     
+    
+    </main>
+
 </body>
+<footer class="">
+    <div class="main-footer">
+        <div class="row">
+            <div class="col- first affix">
+                <h5 class="footer-title">The Plant People</h5>
+                <div class="footer-nav">
+
+                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="#">Community</a>
+
+                </div>
+            </div>
+          <div class="second affix col- d-flex flex-column justify-content-center">
+            <h3 class="newsletter">Join our Newsletter</h3>
+            <div>
+                <input class="newsletter-input" type="text" name="" id="" placeholder="your email here"> <button class="footer-submit">Join</button>
+            </div>
+            <div class="social">
+                info@plantpeople.com &nbsp; |
+                <i class="social-icon fab fa-instagram pl-2 pr-2"></i>
+                <i class="social-icon fab fa-facebook-f pr-2"></i>
+                <i class="social-icon fab fa-youtube"></i>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="bottom-footer text-center">
+        <p>Copyright 2020 by The Plant People</p>
+    </div>
+</footer>
 </html>

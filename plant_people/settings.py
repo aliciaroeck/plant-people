@@ -123,8 +123,6 @@ STATIC_URL = '/static/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-
-
 MEDIA_URL = '/main_app/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'main_app/static/')
 LOGOUT_REDIRECT_URL = '/'
