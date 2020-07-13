@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 # models
 from .models import Profile
 # forms
-from .forms import Create_Profile_Form
+from .forms import Create_Profile_Form, EditProfileForm, ImageForm
 # Create your views here.
 
 
@@ -45,6 +45,25 @@ def community(request):
 
 # Personal Profile Route
 def profile(request):
-    return render(request, 'registration/profile.html')
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES, instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+            return redirect('/profile')
+        else:
+            print(form.errors)
+    context = {'edit_profile_form': EditProfileForm(initial={'full_name':request.user.profile.full_name, 'location':request.user.profile.location, 'bio':request.user.profile.bio}), 'view_user': request.user, 'image_form':ImageForm()}
+    return render(request, 'registration/profile.html', context)
+
+
+def edit_profile(request):
+    user = request.user.profile
+    form = EditProfileForm(request.POST)
+    if request.method == 'POST' and form.is_valid():
+        user.full_name = request.POST.get('full_name')
+        user.location = request.POST.get('location')
+        user.bio = request.POST.get('bio')
+        user.save()
+        return redirect('profile')
 
 

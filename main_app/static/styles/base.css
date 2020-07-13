@@ -59,7 +59,7 @@ a.user-nav:hover {
     cursor: pointer;
 }
 
-h6 {
+.or {
     width: 80%; 
     text-align: center; 
     border-bottom: 1px solid gray; 
@@ -261,4 +261,79 @@ button.footer-submit {
     background-position: center;
     background-size: cover, contain;
 
+}
+
+
+/* ====== Profile ====== */
+.profile-header {
+
+}
+
+/* Profile image */
+.profile-img {
+    height: 400px;
+}
+
+button.edit {
+    border: none;
+    background: transparent;
+}
+
+img.profile-pic {
+    opacity: 1;
+    display: block;
+    transition: .5s ease;
+    backface-visibility: hidden;
+    background-color: white;
+    height: 200px;
+    width: 200px;
+}
+
+.image-container {
+    position: relative;
+}
+
+.middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    display: inline;
+    top: 100px;
+    width: 200px;
+    height: 200px;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: #00000040;
+    border-radius: 50%;
+}
+
+.image-container:hover .middle {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.text {
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 200px;
+    width: 200px;
+}
+
+.profile-pic-sm {
+    object-fit: cover;
+    height: 150px;
+    width: 150px;
+    margin-bottom: 30px;
+    border: 5px solid rgb(168,136,255);
+}
+
+/* profile info */
+.profile-info {
+    margin-bottom: 25px;
 }
