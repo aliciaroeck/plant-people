@@ -55,7 +55,7 @@ def profile(request):
     context = {'edit_profile_form': EditProfileForm(initial={'full_name':request.user.profile.full_name, 'location':request.user.profile.location, 'bio':request.user.profile.bio}), 'view_user': request.user, 'image_form': ImageForm()}
     return render(request, 'registration/profile.html', context)
 
-
+# Edit Profile 
 def edit_profile(request):
     user = request.user.profile
     form = EditProfileForm(request.POST)

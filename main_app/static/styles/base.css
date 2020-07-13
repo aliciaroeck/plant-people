@@ -265,9 +265,6 @@ button.footer-submit {
 
 
 /* ====== Profile ====== */
-.profile-header {
-
-}
 
 /* Profile image */
 .profile-img {
@@ -282,8 +279,8 @@ button.edit {
 img.profile-pic {
     opacity: 1;
     display: block;
+    background-size: inherit;
     transition: .5s ease;
-    backface-visibility: hidden;
     background-color: white;
     height: 200px;
     width: 200px;
@@ -325,15 +322,14 @@ img.profile-pic {
     width: 200px;
 }
 
-.profile-pic-sm {
-    object-fit: cover;
-    height: 150px;
-    width: 150px;
-    margin-bottom: 30px;
-    border: 5px solid rgb(168,136,255);
-}
-
-/* profile info */
+/* Profile info */
 .profile-info {
     margin-bottom: 25px;
+}
+
+/* User posts */
+.user-posts {
+    height: 600px;
+    width: 60%;
+    border-top: solid gray 1px;;
 }

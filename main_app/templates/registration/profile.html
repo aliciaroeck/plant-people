@@ -13,8 +13,8 @@
                 <div class="image-container">
 
                         <!-- Profile image -->
-                    <img class="profile-pic rounded-circle" src="{% static '' %}{{view_user.profile.image}}"
-                        alt="Profile Picture">
+                    <img class="profile-pic rounded-circle" src="{% static '' %}{{view_user.profile.image}}" alt="Profile Picture">
+                    
                     <div class="middle">
                         <div class="text">
                                 <!-- update photo icon -->
@@ -49,21 +49,20 @@
                     
                     <h5 class="modal-title d-flex justify-content-center" id="exampleModalLabel">Edit Profile</h5>
 
-                            <!-- edit form -->
-                        <div class="row">
-                            <div class="col-sm">
-                                <div class="modal-body">
-                                    <form action="{% url 'edit_profile' %}" method="POST">
-                                        {% csrf_token %}
-                                        {{ edit_profile_form|crispy }}
-                                        <div class="text-center form-sm mt-2">
-                                            <button class="submit-modal">Edit Profile</button>
-                                        </div>
-                                    </form>
-                                </div>
+                        <!-- edit form -->
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="modal-body">
+                                <form action="{% url 'edit_profile' %}" method="POST">
+                                    {% csrf_token %}
+                                    {{ edit_profile_form|crispy }}
+                                    <div class="text-center form-sm mt-2">
+                                        <button class="submit-modal">Edit Profile</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-
+                    </div>
                 </div>
             </div>
         </div>
@@ -107,7 +106,7 @@
                 <h6 class="username"> Bio: {{ user.profile.bio }} </h6>
             </div>
 
-                {% if user.id == view_user.id %}
+            {% if user.id == view_user.id %}
                 <button type="button" class="edit" data-toggle="modal" data-target="#exampleModal">
                     <svg class="bi bi-pencil" width="1.5em" height="1.5em" viewBox="0 0 16 16"
                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -117,8 +116,38 @@
                             d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z" />
                     </svg>
                 </button>
-                {%endif%}
-            
+            {%endif%}
+        </div>
+    </div>
+
+    <div class="user-posts container d-flex flex-column">
+        <div class="row mt-4">
+                <!-- Search form -->
+            <div class="col-sm search">
+                <form class="d-flex justify-content-start align-items-center">
+                    <i class="fas fa-search pr-3" aria-hidden="true"></i>
+                    <input class="" type="text" placeholder="Search"
+                    aria-label="Search">
+                </form>
+            </div>
+                <!-- Filter dropdown -->
+            <div class="col-sm filter d-flex justify-content-end">
+                <div class="btn-group">
+                    <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Filter
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <button class="dropdown-item" type="button">Latest</button>
+                      <button class="dropdown-item" type="button">Oldest</button>
+                      <button class="dropdown-item" type="button">Alphabetical</button>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm d-flex justify-content-center">
+                Posts will go here. Someday.
+            </div>
         </div>
     </div>
 
