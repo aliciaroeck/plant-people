@@ -52,7 +52,7 @@ def profile(request):
             return redirect('/profile')
         else:
             print(form.errors)
-    context = {'edit_profile_form': EditProfileForm(initial={'full_name':request.user.profile.full_name, 'location':request.user.profile.location, 'bio':request.user.profile.bio}), 'view_user': request.user, 'image_form':ImageForm()}
+    context = {'edit_profile_form': EditProfileForm(initial={'full_name':request.user.profile.full_name, 'location':request.user.profile.location, 'bio':request.user.profile.bio}), 'view_user': request.user, 'image_form': ImageForm()}
     return render(request, 'registration/profile.html', context)
 
 
