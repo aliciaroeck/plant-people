@@ -10,7 +10,7 @@
     <title>The Plant People</title>
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-         <!-- Compiled and minified Jquery -->
+        <!-- Compiled and minified Jquery -->
     <script src="{% static 'vendors/jquery.min.js' %}"></script>
         <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="{% static 'vendors/bootstrap-grid.min.css' %}">
@@ -27,7 +27,7 @@
 </head>
 <body>
     <header class="d-flex align-items-center justify-content-between">
-        <!-- dropdown menu nav -->
+        <!-- Dropdown menu nav -->
         <nav class="">
             <div class="dropdown show">
                 <a class="nav-list" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -35,8 +35,9 @@
                         <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
                     </svg>
                 </a>
-            
+                    <!-- Links in dropdown -->
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="{% url 'landing'%}">Home</a>
                     <a class="dropdown-item" href="#">About</a>
                     <a class="dropdown-item" href="#">Contact</a>
                     <a class="dropdown-item" href="#">Community</a>
@@ -45,20 +46,21 @@
         </nav>
         <h4 class="title">The Plant People</h4>
 
-
+            <!-- User login/logout nav -->
         <div>
             {% if user.is_authenticated %}
-                <a class="user-nav" href="">Profile</a>
+                <a class="user-nav" href="{% url 'profile'%}"><i class="profile-icon fas fa-user"></i>
+                </a>
                 <a class="user-nav" href="{% url 'logout' %}">Logout</a>
             {% else %}
-            <!-- Login Button trigger modal -->
+                <!-- Login Button trigger modal -->
             <a class="user-nav" data-toggle="modal" data-target="#loginModal">Login</a>
             
-            <!-- Register Button trigger modal -->
+                <!-- Register Button trigger modal -->
             <a class="user-nav" data-toggle="modal" data-target="#registerModal">Register</a>
             {% endif %}
 
-            <!-- Login Modal -->
+                <!-- Login Modal -->
             <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -67,6 +69,8 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+
+                        <!-- Login form -->
                     <h4 class="modal-title d-flex justify-content-center" id="exampleModalLongTitle">Welcome, Plant People!</h4>
                     <div class="modal-body">
                         <form action="{% url 'login' %}" method="POST" id="loginForm">
@@ -82,17 +86,21 @@
                                 <div class="col-sm-10">
                                   <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
                                 </div>
-                              </div>
+                            </div>
                               {% if error %}
                                 <p class="loginError">{{error}}</p>
                               {% endif %}
-                                <input type="submit" class="btn btn-success" value="Login">
-                            </form>
+                            <div class="text-center">
+                                <input type="submit" class="submit-modal" value="Login">
+                            </div>
+                        </form>
                     </div>
+
+                        <!-- Link to Register/Signup -->
                     <div class="d-flex justify-content-center">
                         <h6><span>or</span></h6>
                     </div>
-                    <a class="modal-link close text-center p-2 mb-1" data-toggle="modal" data-target="#registerModalCenter" data-dismiss="modal" aria-label="Close">
+                    <a class="modal-link close text-center p-2 mb-1" data-toggle="modal" data-target="#registerModal" data-dismiss="modal" aria-label="Close">
                         Not a member? Register
                     </a>
                    
@@ -100,7 +108,7 @@
                 </div>
             </div>
             
-            <!-- Register Modal -->
+                <!-- Register Modal -->
             <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -109,18 +117,24 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+
+                        <!-- Register form -->
                     <h4 class="modal-title d-flex justify-content-center" id="exampleModalLongTitle">Create an Account!</h4>
                     <div class="modal-body">
                         <form action="" method="POST">
                             {% csrf_token %}
                             {{ form | crispy }}
-                            <input type="submit" value="Signup">
+                            <div class="text-center">
+                                <input type="submit" class="submit-modal" value="Signup">
+                            </div>
                         </form>
                     </div>
+
+                        <!-- Link to login -->
                     <div class="d-flex justify-content-center">
                         <h6><span>or</span></h6>
                     </div>
-                    <a class="modal-link close text-center p-2 mb-1" data-toggle="modal" data-target="#loginModalCenter" data-dismiss="modal" aria-label="Close">
+                    <a class="modal-link close text-center p-2 mb-1" data-toggle="modal" data-target="#loginModal" data-dismiss="modal" aria-label="Close">
                         Have an account? Login
                     </a>
                 </div>
@@ -136,35 +150,39 @@
     </main>
 
 </body>
+    <!-- Footer nav -->
 <footer class="">
     <div class="main-footer">
         <div class="row">
             <div class="col- first affix">
                 <h5 class="footer-title">The Plant People</h5>
                 <div class="footer-nav">
-
-                        <a class="nav-link" href="#">Home</a>
+                            <!-- nav links -->
+                        <a class="nav-link" href="{% url 'landing'%}">Home</a>
                         <a class="nav-link" href="#">About</a>
                         <a class="nav-link" href="#">Contact</a>
                         <a class="nav-link" href="#">Community</a>
 
                 </div>
             </div>
-          <div class="second affix col- d-flex flex-column justify-content-center">
-            <h3 class="newsletter">Join our Newsletter</h3>
-            <div>
-                <input class="newsletter-input" type="text" name="" id="" placeholder="your email here"> <button class="footer-submit">Join</button>
+                <!-- Newsletter -->
+             <div class="second affix col- d-flex flex-column justify-content-center">
+                <h3 class="newsletter">Join our Newsletter</h3>
+                <div>
+                    <input class="newsletter-input" type="text" name="" id="" placeholder="your email here"> <button class="footer-submit">Join</button>
+                </div>
+
+                    <!-- Social media links -->
+                <div class="social">
+                    info@plantpeople.com &nbsp; |
+                    <i class="social-icon fab fa-instagram pl-2 pr-2"></i>
+                    <i class="social-icon fab fa-facebook-f pr-2"></i>
+                    <i class="social-icon fab fa-youtube"></i>
+                </div>
             </div>
-            <div class="social">
-                info@plantpeople.com &nbsp; |
-                <i class="social-icon fab fa-instagram pl-2 pr-2"></i>
-                <i class="social-icon fab fa-facebook-f pr-2"></i>
-                <i class="social-icon fab fa-youtube"></i>
-            </div>
-          </div>
         </div>
     </div>
-
+        <!-- copyright footer -->
     <div class="bottom-footer text-center">
         <p>Copyright 2020 by The Plant People</p>
     </div>

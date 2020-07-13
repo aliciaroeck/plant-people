@@ -1,8 +1,20 @@
 
+body{
+    width: 100%;
+}
+
+main {
+    margin-top: 90px;
+}
+
 /* header */
 header {
     height: 90px;
-    width: 100%
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    background-color: white;
 }
 
 .title {
@@ -28,6 +40,10 @@ a.user-nav:hover {
 }
 
 /* modal */
+.modal {
+    z-index: 3;
+}
+
 .modal-title {
     font-family: 'Poppins', sans-serif;
 }
@@ -54,6 +70,12 @@ h6 {
  h6 span { 
      background:#fff; 
      padding:0 10px; 
+ }
+
+ .submit-modal {
+    border: none;
+    border-radius: 2px;
+    padding: 5px 40px;
  }
 
 /* nav dropdown */
@@ -147,4 +169,96 @@ button.footer-submit {
     color: #3e432d;
     padding: 10px;
     font-size: 12px;
+}
+
+/* ====== Landing ====== */
+    /* left/right photos with info */
+.left-photo-info {
+    background-image: url(../images/rubber.jpg);
+    background-position: center;
+    background-size: cover, contain;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 532px;
+    color: white;
+    padding: 20px;
+    position: relative;
+}
+
+.left-photo-info::before {
+    position: absolute;
+    content: " ";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background-color: rgba(62, 67, 45, .7);
+}
+
+.photo-info-title {
+    font-family: 'Poppins', sans-serif;
+    z-index: 0;
+}
+
+.photo-info-subtitle {
+    font-family: 'Poppins', sans-serif;
+    z-index: 0;
+}
+
+.photo-info-text {
+    font-family: 'PT Serif', serif;
+    padding: 20px;
+    margin: 20px;
+    font-size: 14px;
+    z-index: 0;
+}
+
+.learn-more-link {
+    z-index: 0;
+}
+
+.learn-more-button {
+    border: none;
+    border-radius: 2px;
+    padding: 5px 15px;
+    background-color: #c3c4b2;
+    color: white;
+}
+
+.right-photo-info {
+    background-image: url(../images/landing-header.jpg);
+    background-position: center;
+    background-size: cover, contain;
+    width: 100%;
+}
+    /* landing posts */
+.posts-preview {
+    height: 330px;
+}
+
+    /* about us */
+.about {
+    font-family: 'Poppins', sans-serif;
+}
+
+.about-text {
+    padding: 40px;
+    font-size: 14px;
+    margin:40px;
+    font-family: 'PT Serif', serif;
+}
+
+.left-about {
+    height: 900px;
+    background-color: #f6f5e8;
+    color: #3e432d;
+    width: 900px;
+}
+
+.about-right {
+    background-image: url(../images/gloriosum.png);
+    background-position: center;
+    background-size: cover, contain;
+
 }

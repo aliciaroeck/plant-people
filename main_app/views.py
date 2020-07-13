@@ -41,10 +41,10 @@ def login(request):
 
 # Community Posts Route
 def community(request):
-    return HttpResponse('<h1>Community Posts Page</h1>')
+    return render(request, 'community/index.html')
 
 # Personal Profile Route
 def profile(request):
-    return HttpResponse('<h1>Profile Page</h1>')
+    return render(request, 'registration/profile.html')
 
 
