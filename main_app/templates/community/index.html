@@ -1,5 +1,114 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-    <h1>Community</h1>
+    <div class="row">
+        <!-- left -->
+        <div class="left-community col-sm d-flex flex-column justify-content-center align-items-center">
+
+        </div>
+            <!-- right -->
+        <div class="middle-community col-sm d-flex flex-column justify-content-center align-items-center">
+            <h1 class="photo-info-title">Welcome to the Community!</h1>
+            <p class="photo-info-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, iusto ipsam suscipit vero doloribus consequatur iure dignissimos modi quam hic sunt necessitatibus quae ad, autem tempora repellendus corrupti. Repellendus, accusantium.</p>
+        </div>
+        <div class="right-community col-sm">
+
+        </div>
+    </div>
+    <div class="community-user-posts container d-flex flex-column">
+        <div class="row m-4">
+                <!-- Search form -->
+            <div class="col-sm">
+                <form class="d-flex justify-content-start align-items-center">
+                    <i class="fas fa-search pr-3" aria-hidden="true"></i>
+                    <input class="search" type="text" placeholder="Search"
+                    aria-label="Search">
+                </form>
+            </div>
+                <!-- Filter dropdown -->
+            <div class="col-sm filter d-flex justify-content-end align-items-center">
+                <div class="btn-group d-flex align-items-center">
+                    <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Filter 
+                    <i class="fas fa-sort-down ml-2"></i>
+                    </button>
+                    
+                    <div class="dropdown-menu dropdown-menu-right">
+                    <button class="dropdown-item" type="button">Latest</button>
+                    <button class="dropdown-item" type="button">Oldest</button>
+                    <button class="dropdown-item" type="button">Alphabetical</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Users posts -->
+    
+        <div class="row d-flex justify-content-center">
+            {% for post in page_obj %}
+            <div class="community-post-container">
+                <div class="float-left">
+                    <img class="community-profile-photo rounded-circle" src="{% static '' %}{{ post.user.image }}" alt="{{ post.user.user }} photo">
+                    <p class="">{{ post.user.user }}</p>
+                </div>
+                <div class="d-flex flex-column justify-content-center align-items-center pt-5">    
+                    <h4>{{ post.title }}</h4>
+                    <p>{{ post.content }}</p>
+                </div>
+            </div>
+
+            {% empty %}
+                <p>No Posts.</p>
+            {% endfor %}
+            </div>
+            <!-- pagination logic -->
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+
+                    {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+    <!------------------- MODALS ------------------->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                
+                    <!-- edit button -->
+                <div class="float-right p-3">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <h5 class="modal-title d-flex justify-content-center" id="exampleModalLabel">{{post.title}}</h5>
+
+                    <!-- edit form -->
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="modal-body">
+                            <form action="{% url 'edit_profile' %}" method="POST">
+                                
+                                <div class="text-center form-sm mt-2">
+                                    <button class="submit-modal"></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -284,6 +284,7 @@ img.profile-pic {
     background-color: white;
     height: 200px;
     width: 200px;
+    border: solid 2px white;
 }
 
 .image-container {
@@ -322,14 +323,112 @@ img.profile-pic {
     width: 200px;
 }
 
+.profile-header {
+    background-color: #c3c4b2;
+}
+
 /* Profile info */
+.username-name {
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 30px;
+}
+
+.username {
+    font-family: 'PT Serif', serif;
+}
+
+.edit-pencil {
+    color: white;
+    transition: .3s linear;
+}
+
+.edit-pencil:hover {
+    transform: scale(1.2);
+}
+
 .profile-info {
     margin-bottom: 25px;
+    color: white;
 }
 
 /* User posts */
 .user-posts {
-    height: 600px;
     width: 60%;
-    border-top: solid gray 1px;;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.search {
+    border: none;
+    border-bottom: solid 1px gray;
+}
+
+.post-container > div {
+    margin: 10px;
+    background-color: gray;
+    text-align: center;
+    font-size: 30px;
+    width: 25vh;
+    height: 25vh;
+}
+
+/* ======== community page ======== */
+/* community header */
+
+.left-community {
+    background-image: url(../images/Monstera-Adansonii.png);
+    background-position: center;
+    background-size: cover, contain;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 532px;
+    color: white;
+    padding: 20px;
+    position: relative;
+}
+
+.middle-community {
+    background-color: #c3c4b2;
+    color: #3e432d;
+}
+
+.right-community {
+    background-image: url(../images/gloriosum.png);
+    background-position: center;
+    background-size: cover, contain;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 532px;
+    color: white;
+    padding: 20px;
+    position: relative;  
+}
+
+
+.community-user-posts {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.community-post-container {
+    margin: 10px;
+    background-color: gray;
+    width: 90vh;
+    height: 40vh;
+}
+
+.community-profile-photo {
+    opacity: 1;
+    display: block;
+    background-size: inherit;
+    transition: .5s ease;
+    background-color: white;
+    height: 100px;
+    width: 100px;
+    border: solid 2px white;
+}
+
+img.community-profile-photo {
+    margin: 20px;
 }

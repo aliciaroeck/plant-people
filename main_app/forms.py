@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.db import models
 from django import forms
-from .models import User, Profile
+from .models import User, Profile, Post
 
 class Create_Profile_Form(UserCreationForm):
     full_name   = forms.CharField(max_length=50)
@@ -24,3 +24,9 @@ class ImageForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('image',)
+
+
+class NewContentPostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('title', 'content')

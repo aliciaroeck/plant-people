@@ -67,13 +67,12 @@
             </div>
         </div>
 
-
         <!-- Image Modal -->
         <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     
-                    <!-- add profil image -->
+                    <!-- add profile image -->
                     <div class="float-right p-3">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -94,20 +93,20 @@
                 </div>
             </div>
         </div>
+        <!------------------ End MODALS ------------------>
 
-        
             <!-- right -->
         <div class="col-sm d-flex flex-column justify-content-center align-items-start">
            
             <!-- show edit button logic -->
             <div class="profile-info">
-                <h6 class="username"> Username: {{ user.username }} </h6>
-                <h6 class="username"> Location: {{ user.profile.location }} </h6>
-                <h6 class="username"> Bio: {{ user.profile.bio }} </h6>
+                <h4 class="username-name"> {{ user.username }} </h4>
+                <h6 class="username"><i class="fas fa-map-marker-alt"></i> &nbsp; {{ user.profile.location }} </h6>
+                <h6 class="username"> {{ user.profile.bio }} </h6>
             </div>
 
-            {% if user.id == view_user.id %}
-                <button type="button" class="edit" data-toggle="modal" data-target="#exampleModal">
+            
+                <button type="button" class="edit edit-pencil" data-toggle="modal" data-target="#exampleModal">
                     <svg class="bi bi-pencil" width="1.5em" height="1.5em" viewBox="0 0 16 16"
                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -116,26 +115,28 @@
                             d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z" />
                     </svg>
                 </button>
-            {%endif%}
         </div>
     </div>
 
+        <!-- Post section -->
     <div class="user-posts container d-flex flex-column">
         <div class="row mt-4">
                 <!-- Search form -->
-            <div class="col-sm search">
+            <div class="col-sm">
                 <form class="d-flex justify-content-start align-items-center">
                     <i class="fas fa-search pr-3" aria-hidden="true"></i>
-                    <input class="" type="text" placeholder="Search"
+                    <input class="search" type="text" placeholder="Search"
                     aria-label="Search">
                 </form>
             </div>
                 <!-- Filter dropdown -->
-            <div class="col-sm filter d-flex justify-content-end">
-                <div class="btn-group">
+            <div class="col-sm filter d-flex justify-content-end align-items-center">
+                <div class="btn-group d-flex align-items-center">
                     <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Filter
+                      Filter 
+                      <i class="fas fa-sort-down ml-2"></i>
                     </button>
+                    
                     <div class="dropdown-menu dropdown-menu-right">
                       <button class="dropdown-item" type="button">Latest</button>
                       <button class="dropdown-item" type="button">Oldest</button>
@@ -144,9 +145,19 @@
                   </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm d-flex justify-content-center">
-                Posts will go here. Someday.
+
+        <div class="row p-3">
+            <!-- Users posts -->
+            {% for post in posts %}
+                <div class="post-container">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <h6>{{ post.title }}</h6>
+                    </div>
+                </div>
+
+                {% empty %}
+                    <p>No Posts.</p>
+                {% endfor %}
             </div>
         </div>
     </div>

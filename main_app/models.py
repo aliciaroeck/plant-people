@@ -19,3 +19,15 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.full_name
+
+
+class Post(models.Model):
+    time        = models.DateTimeField(default=datetime.now)
+    user        = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    title       = models.CharField(max_length=100)
+    content     = models.TextField(max_length=4000)
+    question    = models.CharField(max_length=250, blank=True)
+    location    = models.CharField(max_length=250, blank=True)
+
+    class Meta:
+        ordering = ['-time']
