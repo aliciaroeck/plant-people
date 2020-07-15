@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 # models
 from .models import Profile, Post
 # forms
-from .forms import Create_Profile_Form, EditProfileForm, ImageForm, NewContentPostForm
+from .forms import Create_Profile_Form, EditProfileForm, ImageForm, NewContentPostForm, EditContentForm
 # Create your views here.
 
 
@@ -42,25 +42,22 @@ def login(request):
 
 # Community Posts Route
 def community(request):
+    if request.method == 'POST':
+        create_form = NewContentPostForm(request.POST)
+        if create_form.is_valid():
+            post = create_form.save(commit=False)
+            post.user = request.user.profile
+            post.save()
+            return redirect('community')
+    else:
+        create_form = NewContentPostForm()
     posts = Post.objects.all()
     paginator = Paginator(posts, 5)
 
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'community/index.html', {'page_obj': page_obj})
-
-
-
-def listing(request):
-    contact_list = Contact.objects.all()
-    paginator = Paginator(contact_list, 25) # Show 25 contacts per page.
-
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    return render(request, 'list.html', {'page_obj': page_obj})
-
-
+    return render(request, 'community/index.html', {'page_obj': page_obj, 'create_form': create_form})
 
 
 # Personal Profile Route
@@ -88,11 +85,14 @@ def edit_profile(request):
         user.save()
         return redirect('profile')
 
-# Create Post
-def create_post(request):
-    form = NewContentPostForm(request.POST)
-    if form.is_valid():
-        post = form.save(commit=False)
-        post.profile = request.user.profile
-        post.save()
-    return redirect(f'/community/{post.id}')
+
+# Edit post
+def edit_post(request):
+    post = Post.objects.get(id=post_id)
+    if post.user != request.user:
+        return redirect('community')
+    if request.method == 'POST':
+        edit_content_post = EditContentForm(request.POST, instance=post)
+        if edit_content_post.is_valid():
+            edit_content_post.save()
+            return redirect('community', post_id=post_id)

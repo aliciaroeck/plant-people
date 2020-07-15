@@ -30,3 +30,8 @@ class NewContentPostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'content')
+
+class EditContentForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('title', 'content')

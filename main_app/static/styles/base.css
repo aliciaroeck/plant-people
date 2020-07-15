@@ -432,3 +432,21 @@ img.profile-pic {
 img.community-profile-photo {
     margin: 20px;
 }
+
+p#post-text {
+    display: none;
+}
+
+.hidden {
+    display:none;
+}
+
+.edit-delete {
+    text-decoration: none;
+    color: white;
+}
+
+.edit {
+    border: none;
+    background: transparent;
+}

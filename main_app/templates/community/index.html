@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block content %}
     <div class="row">
@@ -42,18 +43,43 @@
                 </div>
             </div>
         </div>
+
+        <button type="button" class="btn btn-primary show-more" data-toggle="modal" data-target="#add-content-modal">
+            Add Post
+          </button>
         <!-- Users posts -->
     
         <div class="row d-flex justify-content-center">
             {% for post in page_obj %}
             <div class="community-post-container">
+                    <!-- edit/delete post -->
+                <div class="float-right">
+                    <div class="dropdown show">
+                        <a class="edit-delete m-4" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </a>
+                      
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+                            <a class="dropdown-item" href="#" class="edit" data-toggle="modal" data-target="#add-content-modal">Edit</a>
+                            <a class="dropdown-item" href="#">Delete</a>
+                        </div>
+                      </div>
+
+                </div>
                 <div class="float-left">
                     <img class="community-profile-photo rounded-circle" src="{% static '' %}{{ post.user.image }}" alt="{{ post.user.user }} photo">
                     <p class="">{{ post.user.user }}</p>
                 </div>
                 <div class="d-flex flex-column justify-content-center align-items-center pt-5">    
                     <h4>{{ post.title }}</h4>
-                    <p>{{ post.content }}</p>
+                    <p class="card-title truncated"> {{ post.content|truncatechars:150 }}
+                        {% if post.content|length > 150 %} 
+                        <button type="button" class="btn btn-primary show-more" data-toggle="modal" data-target="#exampleModal">
+                            See More
+                          </button>
+                        
+                        {%endif%}</p>
                 </div>
             </div>
 
@@ -81,34 +107,31 @@
     </div>
 
 
-    <!------------------- MODALS ------------------->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <!------------------- MODAL ------------------->
+    <!-- create new post -->
+    <div class="modal fade" id="add-content-modal" tabindex="-1" role="dialog" aria-labelledby="Add Post"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                
-                    <!-- edit button -->
-                <div class="float-right p-3">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create a New Post</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                
-                <h5 class="modal-title d-flex justify-content-center" id="exampleModalLabel">{{post.title}}</h5>
-
-                    <!-- edit form -->
-                <div class="row">
-                    <div class="col-sm">
-                        <div class="modal-body">
-                            <form action="{% url 'edit_profile' %}" method="POST">
-                                
-                                <div class="text-center form-sm mt-2">
-                                    <button class="submit-modal"></button>
-                                </div>
-                            </form>
+                <div class="modal-body">
+                    <form action="{% url 'community' %}" method="POST">
+                        {% csrf_token %}
+                        {{ create_form | crispy}}
+                        <div class="text-center form-sm mt-2">
+                            <button class="btn btn-info">Submit</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <script src="{% static 'scripts/post.js' %}"></script>
 {% endblock %}
