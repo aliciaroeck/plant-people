@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
         <!-- left/right photos with info -->
@@ -19,29 +20,62 @@
         <!-- posts preview -->
     <div class="posts-preview row d-flex justify-content-center align-items-center">
         {% for post in posts %}
-        <div class="post-container">
-            
-            <div class="d-flex justify-content-center align-items-center">
-                <h6>{{ post.title }}</h6>
+
+        <a class="show-more" data-toggle="modal" data-target="#showPostModal">
+            <div class="hidden post-user">{{ post.user.user }}</div>
+            <div class="hidden post-user-img"><img class="modal-user-img rounded-circle" src="{% static '' %}{{ post.user.image }}" alt="{{ post.user.user }} photo"></div>
+            <div class="hidden post-title">{{ post.title }}</div>
+            <div class="hidden post-content">{{ post.content }}</div>
+            <div class="post-container">
+                <div class="d-flex justify-content-center align-items-center">
+                    <h6>{{ post.title }}</h6>
+                </div>
             </div>
-        </div>
+        </a>
         {% endfor %}
     </div>
 
         <!-- About -->
     <div class="row">
         <!-- left -->
-    <div class="left-about col- d-flex flex-column justify-content-center align-items-center">
-        <h1 class="about">About Us.</h1>
-        <p class="about-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, iusto ipsam suscipit vero doloribus consequatur iure dignissimos modi quam hic sunt necessitatibus quae ad, autem tempora repellendus corrupti. Repellendus, accusantium.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla odit rerum voluptates maiores architecto, natus tempora quia quasi cum, aspernatur deleniti a. Aliquid praesentium nulla atque suscipit, quae non reiciendis.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias consequatur, ipsa unde dolorem perspiciatis esse quaerat ullam similique illum, rerum iusto explicabo impedit error ducimus doloremque necessitatibus odit? Asperiores, minus.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta maxime perspiciatis distinctio dolorem minus perferendis aliquam eligendi et corrupti quis. Velit nisi aut fugit laudantium obcaecati odit corrupti nihil rem.
-        </p>
+        <div class="left-about col- d-flex flex-column justify-content-center align-items-center">
+            <h1 class="about">About Us.</h1>
+            <p class="about-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, iusto ipsam suscipit vero doloribus consequatur iure dignissimos modi quam hic sunt necessitatibus quae ad, autem tempora repellendus corrupti. Repellendus, accusantium.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla odit rerum voluptates maiores architecto, natus tempora quia quasi cum, aspernatur deleniti a. Aliquid praesentium nulla atque suscipit, quae non reiciendis.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias consequatur, ipsa unde dolorem perspiciatis esse quaerat ullam similique illum, rerum iusto explicabo impedit error ducimus doloremque necessitatibus odit? Asperiores, minus.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta maxime perspiciatis distinctio dolorem minus perferendis aliquam eligendi et corrupti quis. Velit nisi aut fugit laudantium obcaecati odit corrupti nihil rem.
+            </p>
+        </div>
+            <!-- right -->
+        <div class="about-right col-sm">
+        </div>
+    </div>   
+    
+    <!-- MODALS -->
+    <!-- show post -->
+    <div class="modal fade" id="showPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                    <!-- close button -->
+                <div class="float-right p-3">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- user -->
+                <div class="user float-left"></div>
+                <h5 class="show-modal-title modal-title d-flex justify-content-center"></h5>
+                    <!-- content -->
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="modal-body">
+                            <p class="show-modal-content">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-        <!-- right -->
-    <div class="about-right col-sm">
-    </div>
-</div>    
-
+    <script src="{% static 'scripts/post.js' %}"></script>
 {% endblock %}

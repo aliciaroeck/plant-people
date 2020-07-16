@@ -59,7 +59,6 @@ def community(request):
     context = {'page_obj': page_obj, 'create_form': create_form}
     return render(request, 'community/index.html', context)
 
-""" !!!! TODO Get edit route working """
 # Edit post
 def edit_post(request, post_id):
     post = Post.objects.get(id=post_id)
@@ -75,8 +74,6 @@ def edit_post(request, post_id):
 def delete_post(request, post_id):
     Post.objects.get(id=post_id).delete()
     return redirect('community')
-
-
 
 # Personal Profile Route
 def profile(request):

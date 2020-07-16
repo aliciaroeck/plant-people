@@ -505,6 +505,7 @@ a:hover {
     color: #c3c4b2;
 }
 
+/* Modals */
 .main-post-title {
     font-family: 'Poppins', sans-serif;
 }
@@ -516,5 +517,27 @@ a:hover {
 a.show-more:hover {
     text-decoration: underline;
     cursor: pointer;
+}
+
+.show-modal-title {
+    padding: 10px;
+}
+
+.show-modal-content {
+    padding: 10px;
+    margin: 20px 20px 80px;
+}
+
+.modal-user-img {
+    border: solid 3px white;
+    height: 50px;
+    width: 50px;
+    margin-right: 10px;
+}
+
+.user {
+    padding: 10px;
+    background-color: #3e432d;
+    color: white;
 }
 
