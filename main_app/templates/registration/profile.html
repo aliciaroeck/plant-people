@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="profile-header row">
+        <!-- profile photo -->
+        <div class="profile-img col-sm d-flex flex-column justify-content-center align-items-end">
+                <!-- edit profile image-->
+            
+            <button type="button" class="edit" data-toggle="modal" data-target="#imageModal">
+                <div class="image-container">
+
+                        <!-- Profile image -->
+                    <img class="profile-pic rounded-circle" src="{% static '' %}{{view_user.profile.image}}" alt="Profile Picture">
+                    
+                    <div class="middle">
+                        <div class="text">
+                                <!-- update photo icon -->
+                            <svg class="bi bi-image" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M14.002 2h-12a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1zm-12-1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12z"/>
+                            <path d="M10.648 7.646a.5.5 0 0 1 .577-.093L15.002 9.5V14h-14v-2l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71z"/>
+                            <path fill-rule="evenodd" d="M4.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                            </svg>
+                            Update
+                        </div>
+                    </div>
+
+                </div>
+            </button>
+            
+        
+               
+        </div>
+
+        <!------------------ MODALS ------------------>
+            <!-- Edit Profile Info Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    
+                        <!-- edit button -->
+                    <div class="float-right p-3">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <h5 class="modal-title d-flex justify-content-center" id="exampleModalLabel">Edit Profile</h5>
+
+                        <!-- edit form -->
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="modal-body">
+                                <form action="{% url 'edit_profile' %}" method="POST">
+                                    {% csrf_token %}
+                                    {{ edit_profile_form|crispy }}
+                                    <div class="text-center form-sm mt-2">
+                                        <button class="submit-modal">Edit Profile</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Image Modal -->
+        <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    
+                    <!-- add profile image -->
+                    <div class="float-right p-3">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    
+                        <h5 class="modal-title d-flex justify-content-center" id="imageModalLabel">Add Profile Picture</h5>
+                    <!-- add profile photo form -->
+                    <div class="modal-body d-flex justify-content-center">
+                        <form action="{% url 'profile' %}" enctype="multipart/form-data" method="POST">
+                            {% csrf_token %}
+                            {{ image_form|crispy }}
+                            <div class="text-center form-sm mt-4 mb-2">
+                                <button class="submit-modal">Add Profile Picture</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <!-- show post -->
+        <div class="modal fade" id="showPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                        <!-- close button -->
+                    <div class="float-right p-3">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- user -->
+                    <div class="user float-left"></div>
+                    <h5 class="show-modal-title modal-title d-flex justify-content-center"></h5>
+                        <!-- content -->
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="modal-body">
+                                <p class="show-modal-content">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!------------------ End MODALS ------------------>
+
+            <!-- right -->
+        <div class="col-sm d-flex flex-column justify-content-center align-items-start">
+           
+            <!-- show edit button logic -->
+            <div class="profile-info">
+                <h4 class="username-name"> {{ user.username }} </h4>
+                <h6 class="username"><i class="fas fa-map-marker-alt"></i> &nbsp; {{ user.profile.location }} </h6>
+                <h6 class="username"> {{ user.profile.bio }} </h6>
+            </div>
+
+            
+            <button type="button" class="edit edit-pencil" data-toggle="modal" data-target="#exampleModal">
+                <svg class="bi bi-pencil" width="1.5em" height="1.5em" viewBox="0 0 16 16"
+                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" />
+                    <path fill-rule="evenodd"
+                        d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z" />
+                </svg>
+            </button>
+            
+        </div>
+    </div>
+
+        <!-- Post section -->
+    <div class="user-posts container d-flex flex-column justify-content-center">
+        <div class="row p-3">
+                <!-- Search form -->
+            <div class="col-sm">
+                <form class="d-flex justify-content-start align-items-center">
+                    <i class="fas fa-search pr-3" aria-hidden="true"></i>
+                    <input class="search" type="text" placeholder="Search"
+                    aria-label="Search">
+                </form>
+            </div>
+                <!-- Filter dropdown -->
+            <div class="col-sm filter d-flex justify-content-end align-items-center">
+                <div class="btn-group d-flex align-items-center">
+                    <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Filter 
+                      <i class="fas fa-sort-down ml-2"></i>
+                    </button>
+                    
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <button class="dropdown-item" type="button">Latest</button>
+                      <button class="dropdown-item" type="button">Oldest</button>
+                      <button class="dropdown-item" type="button">Alphabetical</button>
+                    </div>
+                  </div>
+            </div>
+        </div>
+
+        <div class="row p-3 d-flex justify-content-center">
+            <!-- Users posts -->
+            {% for post in posts %}
+                <a class="show-more" data-toggle="modal" data-target="#showPostModal">
+                    <div class="hidden post-user">{{ post.user.user }}</div>
+                    <div class="hidden post-user-img"><img class="modal-user-img rounded-circle" src="{% static '' %}{{ post.user.image }}" alt="{{ post.user.user }} photo"></div>
+                    <div class="hidden post-title">{{ post.title }}</div>
+                    <div class="hidden post-content">{{ post.content }}</div>
+                    <div class="post-container">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <h6>{{ post.title }}</h6>
+                        </div>
+                    </div>
+                </a>
+                {% empty %}
+                    <p>No Posts.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+    <script src="{% static 'scripts/post.js' %}"></script>
+{% endblock %}
