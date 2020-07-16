@@ -3,6 +3,7 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.decorators import login_required
 
 # models
 from .models import Profile, Post
@@ -33,6 +34,7 @@ def login(request):
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(request, username=username, password=password)
+    error_message = ''
     if user is not None:
         login(request, user)
         return redirect('profile')
@@ -41,6 +43,7 @@ def login(request):
 
 
 # Community Posts Route
+@login_required
 def community(request):
     if request.method == 'POST':
         create_form = InsertContentPostForm(request.POST)
@@ -60,6 +63,7 @@ def community(request):
     return render(request, 'community/index.html', context)
 
 # Edit post
+@login_required
 def edit_post(request, post_id):
     post = Post.objects.get(id=post_id)
     if request.method == 'POST':
@@ -71,11 +75,13 @@ def edit_post(request, post_id):
         return render(request, 'community/index.html')
 
 # Delete Post
+@login_required
 def delete_post(request, post_id):
     Post.objects.get(id=post_id).delete()
     return redirect('community')
 
 # Personal Profile Route
+@login_required
 def profile(request):
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES, instance=request.user.profile)
@@ -86,11 +92,11 @@ def profile(request):
             print(form.errors)
     else:
         posts = Post.objects.all().filter(user=request.user.profile.id)
-    context = {'posts': posts, 'edit_profile_form': EditProfileForm(initial={'full_name':request.user.profile.full_name, 'location':request.user.profile.location, 'bio':request.user.profile.bio}), 'view_user': request.user, 'image_form': ImageForm()}
+    context = {'view_user': request.user, 'posts': posts, 'edit_profile_form': EditProfileForm(initial={'full_name':request.user.profile.full_name, 'location':request.user.profile.location, 'bio':request.user.profile.bio}), 'view_user': request.user, 'image_form': ImageForm()}
     return render(request, 'registration/profile.html', context)
 
-
 # Edit Profile 
+@login_required
 def edit_profile(request):
     user = request.user.profile
     form = EditProfileForm(request.POST)
