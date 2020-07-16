@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 # models
 from .models import Profile, Post
 # forms
-from .forms import Create_Profile_Form, EditProfileForm, ImageForm, NewContentPostForm, EditContentForm
+from .forms import Create_Profile_Form, EditProfileForm, ImageForm, InsertContentPostForm
 # Create your views here.
 
 
@@ -43,21 +43,39 @@ def login(request):
 # Community Posts Route
 def community(request):
     if request.method == 'POST':
-        create_form = NewContentPostForm(request.POST)
+        create_form = InsertContentPostForm(request.POST)
         if create_form.is_valid():
             post = create_form.save(commit=False)
             post.user = request.user.profile
             post.save()
             return redirect('community')
     else:
-        create_form = NewContentPostForm()
+        create_form = InsertContentPostForm()
+    """ Pagination """
     posts = Post.objects.all()
     paginator = Paginator(posts, 5)
-
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
+    context = {'page_obj': page_obj, 'create_form': create_form}
+    return render(request, 'community/index.html', context)
 
-    return render(request, 'community/index.html', {'page_obj': page_obj, 'create_form': create_form})
+""" !!!! TODO Get edit route working """
+# Edit post
+def edit_post(request):
+    Post.objects.get(id=post_id)
+    if request.method == 'POST':
+        edit_post = InsertContentPostForm(request.POST, instance=post)
+        if edit_post.is_valid():
+            edit_post.save()
+            return redirect('community')
+
+# Delete Post
+def delete_post(request, post_id):
+    post = Post.objects.get(id=post_id)
+    if post.user != request.user:
+        return redirect('community')
+    post.delete()
+    return redirect('community')
 
 
 # Personal Profile Route
@@ -74,6 +92,7 @@ def profile(request):
     context = {'posts': posts, 'edit_profile_form': EditProfileForm(initial={'full_name':request.user.profile.full_name, 'location':request.user.profile.location, 'bio':request.user.profile.bio}), 'view_user': request.user, 'image_form': ImageForm()}
     return render(request, 'registration/profile.html', context)
 
+
 # Edit Profile 
 def edit_profile(request):
     user = request.user.profile
@@ -86,13 +105,3 @@ def edit_profile(request):
         return redirect('profile')
 
 
-# Edit post
-def edit_post(request):
-    post = Post.objects.get(id=post_id)
-    if post.user != request.user:
-        return redirect('community')
-    if request.method == 'POST':
-        edit_content_post = EditContentForm(request.POST, instance=post)
-        if edit_content_post.is_valid():
-            edit_content_post.save()
-            return redirect('community', post_id=post_id)

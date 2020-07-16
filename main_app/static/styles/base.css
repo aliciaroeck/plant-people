@@ -450,3 +450,7 @@ p#post-text {
     border: none;
     background: transparent;
 }
+
+.modal-post-title {
+    font-family: 'Poppins', sans-serif;
+}
