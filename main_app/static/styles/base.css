@@ -370,6 +370,13 @@ img.profile-pic {
     font-size: 30px;
     width: 25vh;
     height: 25vh;
+    transition: .3s linear;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+}
+
+.post-container > div:hover {
+    transform: scale(1.1);
 }
 
 /* ======== community page ======== */
@@ -404,7 +411,7 @@ img.profile-pic {
     position: relative;  
 }
 
-
+/* Posts */
 .community-user-posts {
     width: 80%;
     display: flex;
@@ -413,9 +420,9 @@ img.profile-pic {
 
 .community-post-container {
     margin: 10px;
-    background-color: gray;
+    background-color: #f6f5e8;
     width: 90vh;
-    height: 40vh;
+    height: 30vh;
 }
 
 .community-profile-photo {
@@ -443,7 +450,13 @@ p#post-text {
 
 .edit-delete {
     text-decoration: none;
-    color: white;
+    color: #3e432d;
+    padding-top: 5px;
+    transition: .3s linear;
+}
+
+.edit-delete:hover {
+    color: #c3c4b2;
 }
 
 .edit {
@@ -451,6 +464,55 @@ p#post-text {
     background: transparent;
 }
 
+.add-post > i {
+    border: none;
+    background: transparent;
+    color: #3e432d;
+    font-size: 20px;
+    transition: .3s linear;
+}
+
+.add-post:hover > i{
+    color: #c3c4b2;
+    margin: 0;
+    padding: 0;
+}
+
 .modal-post-title {
     font-family: 'Poppins', sans-serif;
 }
+
+.left-card-content {
+    background-color: #3e432d;
+    height: 100%;
+    color: white;
+    font-weight: bold;
+}
+
+.truncated {
+    margin: 0 40px;
+    font-family: 'PT Serif', serif;
+}
+
+a {
+    color: #3e432d;
+    transition: .3s linear;
+}
+
+a:hover {
+    color: #c3c4b2;
+}
+
+.main-post-title {
+    font-family: 'Poppins', sans-serif;
+}
+
+.show-more {
+    transition: .3s linear;
+}
+
+a.show-more:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+

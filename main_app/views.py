@@ -62,20 +62,26 @@ def community(request):
 """ !!!! TODO Get edit route working """
 # Edit post
 def edit_post(request):
-    Post.objects.get(id=post_id)
+    Post.objects.get()
     if request.method == 'POST':
         edit_post = InsertContentPostForm(request.POST, instance=post)
         if edit_post.is_valid():
             edit_post.save()
             return redirect('community')
+    else: 
+        return render(request, 'community/index.html')
 
 # Delete Post
-def delete_post(request, post_id):
-    post = Post.objects.get(id=post_id)
-    if post.user != request.user:
+def delete_post(request):
+    if request.method == 'DELETE':
+        post = Post.objects.get()
+        if post.user != request.user:
+            return redirect('community')
+        post.delete()
         return redirect('community')
-    post.delete()
-    return redirect('community')
+    else:
+        return render(request, 'community/index.html')
+
 
 
 # Personal Profile Route

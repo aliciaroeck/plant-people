@@ -44,9 +44,9 @@
             </div>
         </div>
 
-        <button id="add-post" type="button" class="btn btn-primary show-more" data-toggle="modal" data-target="#insert-content-modal">
-            Add Post
-          </button>
+        <a id="add-post" type="button" class="add-post d-flex justify-content-center p-4" data-toggle="modal" data-target="#insert-content-modal">
+            <i class="fas fa-plus">&nbsp; Add Post</i>
+        </a>
         <!-- Users posts -->
     
         <div class="row d-flex justify-content-center">
@@ -67,36 +67,43 @@
                                 <div class="hidden content">{{ post.content }}</div>
                             </a>
                             
-                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete-modal">Delete</a>
+                            <a class="dropdown-item delete-button" href="#" data-toggle="modal" data-target="#delete-modal">
+                                Delete
+                                <div class="hidden post-id">{{ post.id }}</div>
+                            </a>
                         </div>
                       </div>
 
                 </div>
-                <div class="float-left">
+                <div class="float-left left-card-content d-flex flex-column justify-content-center align-items-center">
                     <img class="community-profile-photo rounded-circle" src="{% static '' %}{{ post.user.image }}" alt="{{ post.user.user }} photo">
-                    <p class="">{{ post.user.user }}</p>
+                    <p class="username-user d-flex justify-content-center">{{ post.user.user }}</p>
                 </div>
-                <div class="d-flex flex-column justify-content-center align-items-center pt-5">    
-                    <h4>{{ post.title }}</h4>
+                <div class="d-flex flex-column justify-content-center align-items-center pt-5 main-content">    
+                    <h4 class="main-post-title">{{ post.title }}</h4>
                     <p class="card-title truncated"> {{ post.content|truncatechars:150 }}
                         {% if post.content|length > 150 %} 
-                        <button type="button" class="btn btn-primary show-more" data-toggle="modal" data-target="#exampleModal">
+                        <a class="show-more" data-toggle="modal" data-target="#showPostModal">
                             See More
-                        </button>
-                        
-                        {%endif%}</p>
+                            <div class="hidden post-title">{{ post.title }}</div>
+                            <div class="hidden post-content">{{ post.content }}</div>
+                        </a>
+                        {%endif%}
+                    </p>
                 </div>
             </div>
-
             {% empty %}
                 <p>No Posts.</p>
             {% endfor %}
             </div>
+
             <!-- pagination logic -->
-            <div class="pagination">
+            <div class="pagination d-flex flex-row justify-content-center p-4">
                 <span class="step-links">
                     {% if page_obj.has_previous %}
-                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                    <a href="?page={{ page_obj.previous_page_number }}" class="arrow">
+                        <i class="fas fa-chevron-circle-left"></i>
+                    </a>
                     {% endif %}
 
                     <span class="current">
@@ -104,7 +111,9 @@
                     </span>
 
                     {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?page={{ page_obj.next_page_number }}" class="arrow">
+                        <i class="fas fa-chevron-circle-right"></i>
+                    </a>
                     {% endif %}
                 </span>
             </div>
@@ -150,13 +159,42 @@
                 </div>
                 <div class="modal-body">
                     <p>Are you sure you want to delete this post?</p>
-                    <form id="insert-form" action="{% url 'delete_post' %}" method="POST">
-
+                    <form id="delete-form" action="{% url 'delete_post' %}" method="POST">
+                        {% csrf_token %}
                         <div class="text-center form-sm mt-2">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                             <button class="btn btn-danger submit-button">Delete</button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- show post -->
+    <div class="modal fade" id="showPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                
+                    <!-- close button -->
+                <div class="float-right p-3">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <h5 class="show-modal-title modal-title d-flex justify-content-center"></h5>
+
+                    <!-- content -->
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="modal-body">
+                            <p class="show-modal-content">
+
+                            </p>
+                           
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
