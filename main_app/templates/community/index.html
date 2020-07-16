@@ -43,30 +43,31 @@
                 </div>
             </div>
         </div>
-
+            <!-- add post button -->
         <a id="add-post" type="button" class="add-post d-flex justify-content-center p-4" data-toggle="modal" data-target="#insert-content-modal">
             <i class="fas fa-plus">&nbsp; Add Post</i>
         </a>
-        <!-- Users posts -->
-    
+
+            <!-- Users posts -->
         <div class="row d-flex justify-content-center">
             {% for post in page_obj %}
             <div class="community-post-container">
                     <!-- edit/delete post -->
                 <div class="float-right">
-                    <div class="dropdown show">
+                    <div class="dropdown show mt-2">
                         <a class="edit-delete m-4" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-h"></i>
                         </a>
                       
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-
+                                <!-- edit button -->
                             <a class="dropdown-item edit" href="#" data-toggle="modal" data-target="#insert-content-modal">
                                 Edit
                                 <div class="hidden title">{{ post.title }}</div>
                                 <div class="hidden content">{{ post.content }}</div>
+                                <div class="hidden post-id">{{ post.id }}</div>
                             </a>
-                            
+                                <!-- delete button -->
                             <a class="dropdown-item delete-button" href="#" data-toggle="modal" data-target="#delete-modal">
                                 Delete
                                 <div class="hidden post-id">{{ post.id }}</div>
@@ -81,8 +82,8 @@
                 </div>
                 <div class="d-flex flex-column justify-content-center align-items-center pt-5 main-content">    
                     <h4 class="main-post-title">{{ post.title }}</h4>
-                    <p class="card-title truncated"> {{ post.content|truncatechars:150 }}
-                        {% if post.content|length > 150 %} 
+                    <p class="card-title truncated"> {{ post.content }}
+                        {% if post.content %} 
                         <a class="show-more" data-toggle="modal" data-target="#showPostModal">
                             See More
                             <div class="hidden post-title">{{ post.title }}</div>
@@ -159,7 +160,7 @@
                 </div>
                 <div class="modal-body">
                     <p>Are you sure you want to delete this post?</p>
-                    <form id="delete-form" action="{% url 'delete_post' %}" method="POST">
+                    <form id="delete-form" action="" method="POST">
                         {% csrf_token %}
                         <div class="text-center form-sm mt-2">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

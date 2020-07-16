@@ -365,7 +365,7 @@ img.profile-pic {
 
 .post-container > div {
     margin: 10px;
-    background-color: gray;
+    background-color: lightgray;
     text-align: center;
     font-size: 30px;
     width: 25vh;
@@ -373,10 +373,12 @@ img.profile-pic {
     transition: .3s linear;
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
+
 }
 
 .post-container > div:hover {
     transform: scale(1.1);
+    cursor: pointer;
 }
 
 /* ======== community page ======== */
@@ -419,7 +421,7 @@ img.profile-pic {
 }
 
 .community-post-container {
-    margin: 10px;
+    margin: 30px;
     background-color: #f6f5e8;
     width: 90vh;
     height: 30vh;

@@ -17,8 +17,15 @@
     </div>
 
         <!-- posts preview -->
-    <div class="posts-preview row">
-
+    <div class="posts-preview row d-flex justify-content-center align-items-center">
+        {% for post in posts %}
+        <div class="post-container">
+            
+            <div class="d-flex justify-content-center align-items-center">
+                <h6>{{ post.title }}</h6>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 
         <!-- About -->

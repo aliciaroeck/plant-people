@@ -12,7 +12,9 @@ $('#add-post').click( function() {
 })
 
 $('.edit').click( function() {
-    $('#insert-form').attr('action', "{{% url 'edit_post' %}}");
+    postId = $(this).find('.post-id').html();
+
+    $('#insert-form').attr('action', `/${postId}/edit_post/`);
 
     $('#insert-content-modal .modal-post-title').html("Edit Post");
     $('#insert-content-modal .submit-button').html("Edit Post");
@@ -28,7 +30,9 @@ $('.edit').click( function() {
 
 $('.show-more').click( function() {
     postTitle = $(this).find('.post-title').html();
-    postContent = $(this).find('.post-content').html();
+    postContent = $(this).find('.post-content').text();
+
+    console.log($(this))
 
     $('#showPostModal .show-modal-title').append(`${postTitle}`);
     $('#showPostModal .show-modal-content').append(`${postContent}`);
@@ -36,10 +40,10 @@ $('.show-more').click( function() {
 })
 
 
-/* $('.delete-button').click( function() {
+$('.delete-button').click( function() {
 
-    postId = $(this).find('.post-id').html();
-    $('#delete-modal #delete-form').attr('action', `{% url 'delete_post' ${postId} %}`);
+    postIdDelete = $(this).find('.post-id').html();
+    $('#delete-form').attr('action', `/${postIdDelete}/delete_post/`);
 
-}) */
+})
 
