@@ -53,14 +53,16 @@
             {% for post in page_obj %}
             <div class="community-post-container">
                     <!-- edit/delete post -->
+                
                 <div class="float-right">
                     <div class="dropdown show mt-2">
                         <a class="edit-delete m-4" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-h"></i>
                         </a>
-                      
+                    
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <!-- edit button -->
+                            {% if post.user.id == user.profile.id %}
                             <a class="dropdown-item edit" href="#" data-toggle="modal" data-target="#insert-content-modal">
                                 Edit
                                 <div class="hidden title">{{ post.title }}</div>
@@ -72,9 +74,10 @@
                                 Delete
                                 <div class="hidden post-id">{{ post.id }}</div>
                             </a>
+                            {%endif%}
                         </div>
                       </div>
-
+                
                 </div>
                 <div class="float-left left-card-content d-flex flex-column justify-content-center align-items-center">
                     <img class="community-profile-photo rounded-circle" src="{% static '' %}{{ post.user.image }}" alt="{{ post.user.user }} photo">
