@@ -17,7 +17,7 @@ The idea for Plant People came from trying to keep up with all of my Facebook pl
 - pip3 install -r requirements.txt
 
 # User Stories
-
+TBD
 
 # Wireframes
 ### Landing
