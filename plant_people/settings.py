@@ -25,7 +25,7 @@ SECRET_KEY = '7qp%!joi8kifvdk_j39y&_9_ozx_3pl=gkofiq6@#*-6r)%wln'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [https://plant-people.herokuapp.com]
 
 # Application definition
 
