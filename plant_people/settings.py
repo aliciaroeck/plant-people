@@ -128,3 +128,7 @@ MEDIA_URL = '/main_app/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'main_app/static/')
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/community/'
+
+# Configure Django App for Heroku.
+import django_heroku
+django_heroku.settings(locals())
