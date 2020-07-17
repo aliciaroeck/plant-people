@@ -144,7 +144,6 @@
                     <form id="insert-form" action="{% url 'community' %}" method="POST">
                         {% csrf_token %}
                         {{ create_form|crispy|linebreaksbr }}
-                        {{ form.media }}
                         <div class="text-center form-sm mt-2">
                             <button class="btn btn-info submit-button">Submit</button>
                         </div>

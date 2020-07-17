@@ -21,7 +21,7 @@ $('.edit').click( function() {
     $('#insert-content-modal .submit-button').html("Edit Post");
 
     title = $(this).find('.title').html();
-    content = $(this).find('.content').html();
+    content = $(this).find('.content').html().replace(/(<br>)*/g,"");
     $('#insert-content-modal input[name=title]').val(title);
     $('#insert-content-modal textarea[name=content]').val(content);
 });
