@@ -1,1 +1,1 @@
-web: gunicorn plant-people.wsgi
+web: gunicorn plant_people.wsgi
