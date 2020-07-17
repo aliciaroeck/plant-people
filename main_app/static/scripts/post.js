@@ -31,7 +31,7 @@ $('.show-more').click( function() {
     postUser = $(this).find('.post-user').html();
     postUserImg = $(this).find('.post-user-img').html();
     postTitle = $(this).find('.post-title').html();
-    postContent = $(this).find('.post-content').text();
+    postContent = $(this).find('.post-content').html();
 
     console.log($(this))
     $('#showPostModal .user').append(`${postUserImg}`);
