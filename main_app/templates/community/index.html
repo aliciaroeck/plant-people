@@ -11,7 +11,7 @@
             <!-- right -->
         <div class="middle-community col-sm d-flex flex-column justify-content-center align-items-center">
             <h1 class="photo-info-title">Welcome to the Community!</h1>
-            <p class="photo-info-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, iusto ipsam suscipit vero doloribus consequatur iure dignissimos modi quam hic sunt necessitatibus quae ad, autem tempora repellendus corrupti. Repellendus, accusantium.</p>
+            <p class="photo-info-text">We're so happy to have you here! Use this space to share your plant knowlege. Share all of your tips and tricks with the rest of the community!</p>
         </div>
         <div class="right-community col-sm">
 
@@ -66,7 +66,7 @@
                             <a class="dropdown-item edit" href="#" data-toggle="modal" data-target="#insert-content-modal">
                                 Edit
                                 <div class="hidden title">{{ post.title }}</div>
-                                <div class="hidden content">{{ post.content }}</div>
+                                <div class="hidden content">{{ post.content|linebreaksbr }}</div>
                                 <div class="hidden post-id">{{ post.id }}</div>
                             </a>
                                 <!-- delete button -->
@@ -87,14 +87,14 @@
                 </div>
                 <div class="d-flex flex-column justify-content-center align-items-center p-5">
                     <h4 class="main-post-title">{{ post.title }}</h4>
-                    <p class="card-title truncated"> {{ post.content|truncatechars:100}}</p>
-                    {% if post.content|length > 100 %}
+                    <p class="card-title truncated"> {{ post.content|linebreaksbr|truncatechars:100}}</p>
+                    {% if post.content|linebreaksbr|length > 100%}
                     <a class="show-more " data-toggle="modal" data-target="#showPostModal">
                         See More
                         <div class="hidden post-user">{{ post.user.user }}</div>
                         <div class="hidden post-user-img"><img class="modal-user-img rounded-circle" src="{% static '' %}{{ post.user.image }}" alt="{{ post.user.user }} photo"></div>
                         <div class="hidden post-title">{{ post.title }}</div>
-                        <div class="hidden post-content">{{ post.content }}</div>
+                        <div class="hidden post-content">{{ post.content|linebreaksbr }}</div>
                     </a>
                     {%endif%}
                 </div>
@@ -143,7 +143,7 @@
                 <div class="modal-body">
                     <form id="insert-form" action="{% url 'community' %}" method="POST">
                         {% csrf_token %}
-                        {{ create_form | crispy}}
+                        {{ create_form|crispy|linebreaksbr }}
                         <div class="text-center form-sm mt-2">
                             <button class="btn btn-info submit-button">Submit</button>
                         </div>

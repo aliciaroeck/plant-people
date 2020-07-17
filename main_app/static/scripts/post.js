@@ -21,7 +21,7 @@ $('.edit').click( function() {
     $('#insert-content-modal .submit-button').html("Edit Post");
 
     title = $(this).find('.title').html();
-    content = $(this).find('.content').html();
+    content = $(this).find('.content').html().replace(/(<br>)*/g,"");
     $('#insert-content-modal input[name=title]').val(title);
     $('#insert-content-modal textarea[name=content]').val(content);
 });
@@ -31,7 +31,7 @@ $('.show-more').click( function() {
     postUser = $(this).find('.post-user').html();
     postUserImg = $(this).find('.post-user-img').html();
     postTitle = $(this).find('.post-title').html();
-    postContent = $(this).find('.post-content').text();
+    postContent = $(this).find('.post-content').html();
 
     console.log($(this))
     $('#showPostModal .user').append(`${postUserImg}`);
