@@ -21,16 +21,16 @@ The idea for Plant People came from trying to keep up with all of my Facebook pl
 
 # Wireframes
 ### Landing
-![picture](static/images/wireframes/landing.png)
+![picture](main_app/static/images/wireframes/landing.png)
 
 ### Profile
-![picture](static/images/wireframes/profile.png)
+![picture](main_app/static/images/wireframes/profile.png)
 
 ### Community
-![picture](static/images/wireframes/community.png)
+![picture](main_app/static/images/wireframes/community.png)
 
 # entity relationship diagrams
-![picture](static/images/wireframes/ERD.png)
+![picture](main_app/static/images/wireframes/ERD.png)
 
 ### unsolved problems
 - Friendly Errors
