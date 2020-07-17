@@ -21,16 +21,16 @@ TBD
 
 # Wireframes
 ### Landing
-![picture](main_app/static/images/wireframes/landing.png)
+![picture](main_app/static/images/Wireframes/landing.png)
 
 ### Profile
-![picture](main_app/static/images/wireframes/profile.png)
+![picture](main_app/static/images/Wireframes/profile.png)
 
 ### Community
-![picture](main_app/static/images/wireframes/community.png)
+![picture](main_app/static/images/Wireframes/community.png)
 
 # entity relationship diagrams
-![picture](main_app/static/images/wireframes/ERD.png)
+![picture](main_app/static/images/Wireframes/ERD.png)
 
 ### unsolved problems
 - Friendly Errors
