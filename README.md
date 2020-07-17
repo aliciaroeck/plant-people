@@ -30,7 +30,7 @@ The idea for Plant People came from trying to keep up with all of my Facebook pl
 ![picture](static/images/wireframes/community.png)
 
 # entity relationship diagrams
-
+![picture](static/images/wireframes/ERD.png)
 
 ### unsolved problems
 - Friendly Errors
