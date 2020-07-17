@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+        <!-- left/right photos with info -->
+    <div class="row">
+            <!-- left -->
+        <div class="left-photo-info col-sm d-flex flex-column justify-content-center align-items-center">
+            <h1 class="photo-info-title">Leaf Lovers</h1>
+            <h4 class="photo-info-subtitle">Come and join our plant family!</h4>
+            <p class="photo-info-text">We'll share all the family secrets, like local plant arrivals, and Plant Parents's tips for caring for your own plant family. Get all of the tips, tricks, and plant guides to make plant parenting downright easy.</p>
+            <a class="learn-more-link" href="#"><button class="learn-more-button">Learn More</button></a>
+        </div>
+            <!-- right -->
+        <div class="right-photo-info col-sm">
+
+        </div>
+    </div>
+
+        <!-- posts preview -->
+    <div class="posts-preview row d-flex justify-content-center align-items-center">
+        {% for post in posts %}
+
+        <a class="show-more" data-toggle="modal" data-target="#showPostModal">
+            <div class="hidden post-user">{{ post.user.user }}</div>
+            <div class="hidden post-user-img"><img class="modal-user-img rounded-circle" src="{% static '' %}{{ post.user.image }}" alt="{{ post.user.user }} photo"></div>
+            <div class="hidden post-title">{{ post.title }}</div>
+            <div class="hidden post-content">{{ post.content|linebreaksbr }}</div>
+            <div class="post-container">
+                <div class="d-flex justify-content-center align-items-center">
+                    <h6>{{ post.title }}</h6>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+
+        <!-- About -->
+    <div class="row">
+        <!-- left -->
+        <div class="left-about col- d-flex flex-column justify-content-center align-items-center">
+            <h1 class="about">About Us.</h1>
+            <p class="about-text">
+                The idea for Plant People came from trying to keep up with all of my Facebook plant groups. I thought, how cool would it be if all of these posts could be found and tracked in one place? Thus Plant People was born. Users are able to post simple posts as of right now that can be tied to their profile page.
+            </p>
+        </div>
+            <!-- right -->
+        <div class="about-right col-sm">
+        </div>
+    </div>   
+    
+    <!-- MODALS -->
+    <!-- show post -->
+    <div class="modal fade" id="showPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                    <!-- close button -->
+                <div class="float-right p-3">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- user -->
+                <div class="user float-left"></div>
+                <h5 class="show-modal-title modal-title d-flex justify-content-center"></h5>
+                    <!-- content -->
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="modal-body">
+                            <p class="show-modal-content">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'scripts/post.js' %}"></script>
+{% endblock %}

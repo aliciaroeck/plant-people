@@ -1,0 +1,215 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="row">
+        <!-- left -->
+        <div class="left-community col-sm d-flex flex-column justify-content-center align-items-center">
+
+        </div>
+            <!-- right -->
+        <div class="middle-community col-sm d-flex flex-column justify-content-center align-items-center">
+            <h1 class="photo-info-title">Welcome to the Community!</h1>
+            <p class="photo-info-text">We're so happy to have you here! Use this space to share your plant knowlege. Share all of your tips and tricks with the rest of the community!</p>
+        </div>
+        <div class="right-community col-sm">
+
+        </div>
+    </div>
+    <div class="community-user-posts container d-flex flex-column">
+        <div class="row m-4">
+                <!-- Search form -->
+            <div class="col-sm">
+                <form class="d-flex justify-content-start align-items-center">
+                    <i class="fas fa-search pr-3" aria-hidden="true"></i>
+                    <input class="search" type="text" placeholder="Search"
+                    aria-label="Search">
+                </form>
+            </div>
+                <!-- Filter dropdown -->
+            <div class="col-sm filter d-flex justify-content-end align-items-center">
+                <div class="btn-group d-flex align-items-center">
+                    <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Filter 
+                    <i class="fas fa-sort-down ml-2"></i>
+                    </button>
+                    
+                    <div class="dropdown-menu dropdown-menu-right">
+                    <button class="dropdown-item" type="button">Latest</button>
+                    <button class="dropdown-item" type="button">Oldest</button>
+                    <button class="dropdown-item" type="button">Alphabetical</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!-- add post button -->
+        <a id="add-post" type="button" class="add-post d-flex justify-content-center p-4" data-toggle="modal" data-target="#insert-content-modal">
+            <i class="fas fa-plus">&nbsp; Add Post</i>
+        </a>
+
+            <!-- Users posts -->
+        <div class="row d-flex justify-content-center">
+            {% for post in page_obj %}
+            <div class="community-post-container">
+                    <!-- edit/delete post -->
+                
+                <div class="float-right">
+                    <div class="dropdown show mt-2">
+                        <a class="edit-delete m-4" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </a>
+                    
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <!-- edit button -->
+                            {% if post.user.id == user.profile.id %}
+                            <a class="dropdown-item edit" href="#" data-toggle="modal" data-target="#insert-content-modal">
+                                Edit
+                                <div class="hidden title">{{ post.title }}</div>
+                                <div class="hidden content">{{ post.content|linebreaksbr }}</div>
+                                <div class="hidden post-id">{{ post.id }}</div>
+                            </a>
+                                <!-- delete button -->
+                            <a class="dropdown-item delete-button" href="#" data-toggle="modal" data-target="#delete-modal">
+                                Delete
+                                <div class="hidden post-id">{{ post.id }}</div>
+                            </a>
+                            {%endif%}
+                        </div>
+                      </div>
+                
+                </div>
+                <div class="float-left left-card-content d-flex flex-column justify-content-center align-items-center">
+                    <img class="community-profile-photo rounded-circle" src="{% static '' %}{{ post.user.image }}" alt="{{ post.user.user }} photo">
+                    
+                    <p class="username-user d-flex justify-content-center">{{ post.user.user }}</p>
+                    
+                </div>
+                <div class="d-flex flex-column justify-content-center align-items-center p-5">
+                    <h4 class="main-post-title">{{ post.title }}</h4>
+                    <p class="card-title truncated"> {{ post.content|linebreaksbr|truncatechars:100}}</p>
+                    {% if post.content|linebreaksbr|length > 100%}
+                    <a class="show-more " data-toggle="modal" data-target="#showPostModal">
+                        See More
+                        <div class="hidden post-user">{{ post.user.user }}</div>
+                        <div class="hidden post-user-img"><img class="modal-user-img rounded-circle" src="{% static '' %}{{ post.user.image }}" alt="{{ post.user.user }} photo"></div>
+                        <div class="hidden post-title">{{ post.title }}</div>
+                        <div class="hidden post-content">{{ post.content|linebreaksbr }}</div>
+                    </a>
+                    {%endif%}
+                </div>
+            </div>
+            {% empty %}
+                <p>No Posts.</p>
+            {% endfor %}
+            </div>
+
+            <!-- pagination logic -->
+            <div class="pagination d-flex flex-row justify-content-center p-4">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}" class="arrow">
+                        <i class="fas fa-chevron-circle-left"></i>
+                    </a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+
+                    {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="arrow">
+                        <i class="fas fa-chevron-circle-right"></i>
+                    </a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+    <!------------------- MODAL ------------------->
+    <!-- create new post -->
+    <div class="modal fade" id="insert-content-modal" tabindex="-1" role="dialog" aria-labelledby="Add Post"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-post-title" id="exampleModalLabel">Create a New Post</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="insert-form" action="{% url 'community' %}" method="POST">
+                        {% csrf_token %}
+                        {{ create_form|crispy|linebreaksbr }}
+                        <div class="text-center form-sm mt-2">
+                            <button class="btn btn-info submit-button">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- delete modal -->
+    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete Post"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-post-title" id="exampleModalLabel">Delete Post</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this post?</p>
+                    <form id="delete-form" action="" method="POST">
+                        {% csrf_token %}
+                        <div class="text-center form-sm mt-2">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button class="btn btn-danger submit-button">Delete</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- show post -->
+    <div class="modal fade" id="showPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                
+                    <!-- close button -->
+                <div class="float-right p-3">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <!-- user -->
+                <div class="user float-left"></div>
+
+                <h5 class="show-modal-title modal-title d-flex justify-content-center"></h5>
+
+                    <!-- content -->
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="modal-body">
+                            <p class="show-modal-content">
+
+                            </p>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="{% static 'scripts/post.js' %}"></script>
+{% endblock %}

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -120,3 +121,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT =  os.path.join(BASE_DIR, 'staticfiles')
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+MEDIA_URL = '/main_app/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'main_app/static/')
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/community/'
