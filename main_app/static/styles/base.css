@@ -275,19 +275,20 @@ button.edit {
     background: transparent;
 }
 
+.image-container {
+    position: relative;
+    object-fit: cover;
+}
+
 img.profile-pic {
     opacity: 1;
     display: block;
-    background-size: inherit;
     transition: .5s ease;
     background-color: white;
     height: 200px;
     width: 200px;
     border: solid 2px white;
-}
-
-.image-container {
-    position: relative;
+    object-position: 5% 1px; 
 }
 
 .middle {
@@ -376,7 +377,6 @@ img.profile-pic {
 }
 
 .post-container > div:hover {
-    transform: scale(1.1);
     cursor: pointer;
 }
 

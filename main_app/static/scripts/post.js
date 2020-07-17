@@ -44,7 +44,15 @@ $('.show-more').click( function() {
                 $('#showPostModal .user').empty();
                 $('#showPostModal .show-modal-title').empty();
                 $('#showPostModal .show-modal-content').empty(); 
-        },200)
+        },100)
+    });
+
+    $('#showPostModal .close-modal').click( function() {
+        setTimeout(function(){
+                $('#showPostModal .user').empty();
+                $('#showPostModal .show-modal-title').empty();
+                $('#showPostModal .show-modal-content').empty(); 
+        },100)
     });
 });
 

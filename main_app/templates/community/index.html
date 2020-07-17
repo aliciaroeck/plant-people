@@ -61,6 +61,7 @@
                         </a>
                     
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
                                 <!-- edit button -->
                             {% if post.user.id == user.profile.id %}
                             <a class="dropdown-item edit" href="#" data-toggle="modal" data-target="#insert-content-modal">
@@ -69,6 +70,7 @@
                                 <div class="hidden content">{{ post.content|linebreaksbr }}</div>
                                 <div class="hidden post-id">{{ post.id }}</div>
                             </a>
+
                                 <!-- delete button -->
                             <a class="dropdown-item delete-button" href="#" data-toggle="modal" data-target="#delete-modal">
                                 Delete
@@ -84,6 +86,7 @@
                     
                     <p class="username-user d-flex justify-content-center">{{ post.user.user }}</p>
                     
+                    <!-- truncate logic -->
                 </div>
                 <div class="d-flex flex-column justify-content-center align-items-center p-5">
                     <h4 class="main-post-title">{{ post.title }}</h4>
@@ -129,7 +132,7 @@
 
 
     <!------------------- MODAL ------------------->
-    <!-- create new post -->
+        <!-- create new post -->
     <div class="modal fade" id="insert-content-modal" tabindex="-1" role="dialog" aria-labelledby="Add Post"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -202,7 +205,7 @@
                             <p class="show-modal-content">
 
                             </p>
-                           
+                            <button type="button" class="btn btn-secondary float-right m-3 close-modal" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
